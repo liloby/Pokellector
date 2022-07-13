@@ -13,11 +13,11 @@
         </div>
         <div class="card-content">
           <p>Type: {{ pokemon.type }}</p>
-          <p>Level: {{ pokemon.description }}</p>
-          <p>Description: {{ pokemon.level }}</p>
+          <p>Level: {{ pokemon.level }}</p>
+          <p>Description: {{ pokemon.description}}</p>
         </div>
         <div class="card-action">
-          <a href="#">I Choose You!</a>
+          <a class="margin-center" href="{% url 'detail' pokemon.id %}">I Choose You!</a>
         </div>
       </div>
     </div>
