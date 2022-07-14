@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Catch Pokemon</h1>
+{% if pokemon %}
+<h1 class="center">Edit {{ pokemon.name }}</h1>
+{% else%}
+<h1 class="center">Catch Pokemon</h1>
+{% endif %}
+<div class="card">
   <!-- Leaving the action empty makes the form post to the same url used to display it -->
   <form action="" method="POST">
     <!-- Django requires the following for security purposes -->
@@ -10,6 +15,9 @@
       <!-- Render the inputs inside of <tr>s & <td>s -->
       {{ form.as_table }}
     </table>
-    <input type="submit" value="Submit!" class="btn">
+    <div class="center">
+    <input type="submit" value="Submit!" class="btn submit-btn">
+  </div>
   </form>
+</div>
 {% endblock %}

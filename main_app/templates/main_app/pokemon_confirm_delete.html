@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="center">Release Pokemon</h1>
+<div class="card">
+
+<h4 class="center black-text">Are you sure you want to release <span class="black-text center">{{ pokemon.name }}?</span></h4>
+<div class="center"> 
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Release!" class="btn">
+    <a href="{% url 'detail' pokemon.id %}">I've Changed My Mind</a>
+  </form>
+</div>
+</div>
+{% endblock %}
