@@ -12,14 +12,16 @@
 <body>
   <header class="navbar-fixed">
     <nav>
-      <div class="nav-wrapper">
+      <div class="nav-wrapper blue darken-3">
         <ul>
-          <li><a href="/" class="center brand-logo">PokemonCollector</a></li>
+          <li><a href="/" class="center brand-logo">Pokellector</a></li>
         </ul>
         <ul class="right">
-          <li><a href="{% url 'about' %}">About</a></li>
           <li><a href="{% url 'index' %}">View All My Pokemons</a></li>
+          <li><a href="{% url 'pokemons_create' %}">Catch a Pokemon</a></li>
+          <li><a href="{% url 'about' %}">About</a></li>
         </ul>
+        <img class="ball-icon" src="{% static 'css/pokeball.png' %}" width="50px">
       </div>
     </nav>
   </header>
@@ -27,8 +29,8 @@
     {% block content %}
     {% endblock %}
   </main>
-  <footer class="page-footer">
-    <div class="right">All Rights Reserved, &copy; 2022 Pokemon Collector &nbsp;</div>
+  <footer class="page-footer blue darken-3">
+    <div class="left">&nbsp&nbsp All Rights Reserved, &copy; 2022 Pokellector</div>
   </footer>
 </body>
 </html>

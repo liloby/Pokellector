@@ -2,6 +2,9 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    background: url('./background.png');
+    background-size: cover;
+    background-attachment: fixed;
 }
   
 main {
@@ -13,6 +16,10 @@ footer.page-footer {
     text-align: right;
 }
 
+h1 {
+    color: white;
+}
+
 .center {
     display: flex; 
     flex-direction: column;
@@ -20,6 +27,142 @@ footer.page-footer {
     align-content: center;
 }
 
-.margin-center {
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+    color: red;
     margin-left: 24px;
+    -webkit-transition: color .3s ease;
+    transition: color .3s ease;
+    text-transform: uppercase;
 }
+
+.ball-icon {
+    position: absolute;
+    top: 10%;
+    left: .5%;
+    animation: spin 15s infinite;
+}
+
+.inline-box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    align-content: center;
+    grid-gap: .5rem 2rem;
+    background: linear-gradient(0deg, rgba(200,200,200,.75), rgba(100, 100, 100, .55));
+    padding: 1.5rem;
+}
+
+.des-height {
+    min-height: 3.5rem;
+}
+
+.card {
+    background: linear-gradient(180deg, rgba(255, 180, 180, 0.75), rgba(255, 191, 0, 0.55));
+}
+
+.poke-ball {
+    animation: move-ball 4s infinite;
+}
+
+.poke-ball:hover {
+    animation: move-ball .5s infinite;
+}
+
+.new-pokemon {
+    position: absolute;
+    right: .45rem;
+    top: -1rem;
+    font-size: 1.2rem;
+    color: rgb(13, 255, 0);
+}
+@keyframes move-ball {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(20deg);
+    }
+    50% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(20deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+        margin-top: -5%;
+    }
+    7% {
+        margin-top: -5%;
+    }
+    15% {
+        transform: rotate(0deg);
+        margin-top: 0%;
+        margin-left: 0%;
+    }
+    30% {
+        transform: rotate(30deg);
+        margin-top: 0%;
+        margin-left: .5%;
+    }
+    45% {
+        transform: rotate(-30deg);
+        margin-top: 0%;
+        margin-left: -.5%;
+    }
+    95% {
+        margin-left: 38%;
+        margin-top: 0%;
+    }
+    100% {
+        transform: rotate(1800deg);
+        margin-left: 38%;
+        margin-top: -5%;
+    }
+
+}
+
+/* @keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    12.5% {
+        transform: rotate(15deg);
+    }
+    25% {
+        transform: rotate(30deg);
+        left: .9%;
+        top: 9%;
+    }
+    37.5% {
+        transform: rotate(15deg);
+    }
+    50% {
+        transform: rotate(0deg);
+        left: .5%;
+        top: 10%;
+    }
+    62.5% {
+        transform: rotate(-15deg);
+    }
+    75% {
+        transform: rotate(-30deg);
+        left: 0%;
+        top: 9%;
+    }
+    87.5% {
+        transform: rotate(-15deg);
+    }
+    100% {
+        transform: rotate(0deg);
+        left: .5%;
+        top: 10%;
+    }
+} */

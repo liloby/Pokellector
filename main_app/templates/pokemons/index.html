@@ -3,18 +3,24 @@
 
 <h1 class="center">Pokemon List</h1>
 
+<div class="inline-box">
 {% for pokemon in pokemons %}
-<div class="row center">
-    <div class="col s12 m5">
+<div class="col center">
+    <div class="col s12 m5 min-height">
       <div class="card">
         <div class="card-image">
-          <img src="https://www.pngmart.com/files/2/Pokeball-PNG-Photos.png">
+          <a href="{% url 'detail' pokemon.id %}">
+            {% if latest_pokemon == pokemon %}
+            <p class="new-pokemon">NEW</p>
+            {% endif %}
+          <img class="poke-ball" src="https://www.pngmart.com/files/2/Pokeball-PNG-Photos.png">
+        </a>
           <h5>{{ pokemon.name }}</h3>
         </div>
         <div class="card-content">
           <p>Type: {{ pokemon.type }}</p>
           <p>Level: {{ pokemon.level }}</p>
-          <p>Description: {{ pokemon.description}}</p>
+          <p class="des-height">Description: {{ pokemon.description}}</p>
         </div>
         <div class="card-action">
           <a class="margin-center" href="{% url 'detail' pokemon.id %}">I Choose You!</a>
@@ -23,4 +29,5 @@
     </div>
   </div>
   {% endfor %}
+</div>
 {% endblock %}
