@@ -3,17 +3,37 @@
 
 <h1 class="center">Pokemon Details</h1>
 
-<div class="card">
-    <div class="card-content">
-      <span class="card-title">{{ pokemon.name }}</span>
-      <p>Type: {{ pokemon.type }}</p>
-      <p>Level: {{ pokemon.level }}</p>
-      <p>Description: {{ pokemon.description }}</p>
-    </div>
-    <div class="card-action">
-      <a href="{% url 'pokemons_update' pokemon.id %}">Edit</a>
-      <a href="{% url 'pokemons_delete' pokemon.id %}">Release</a>
+<div class="row">
+  <div class="col s6">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">{{ pokemon.name }}</span>
+        <p>Type: {{ pokemon.type }}</p>
+        <p>Level: {{ pokemon.level }}</p>
+        <p>Description: {{ pokemon.description }}</p>
+      </div>
+      <div class="card-action">
+        <a href="{% url 'pokemons_update' pokemon.id %}">Edit</a>
+        <a href="{% url 'pokemons_delete' pokemon.id %}">Release</a>
+      </div>
     </div>
   </div>
+  <div class="col s6">
+    <table class="striped">
+      <thead>
+        <tr><th>Date</th><th>Interaction</th></tr>
+      </thead>
+      <tbody>
+        {% for interaction in pokemon.interaction_set.all %}
+          <tr>
+            <td>{{interaction.date}}</td>
+            <td>{{interaction.get_interact_display}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
 
 {% endblock %}
