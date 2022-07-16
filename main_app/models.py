@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from datetime import date
 
 INTERACTS = (
     ('P', 'Pet'),
@@ -20,6 +21,9 @@ class Pokemon(models.Model):
 
     def get_absolute_url(self):
         return reverse('detail', kwargs={'pokemon_id': self.id})
+    
+    def interact_for_today(self):
+        return self.interaction_set.filter(date=date.today()).count() 
 
 class Interaction(models.Model):
     date = models.DateField()
@@ -33,3 +37,6 @@ class Interaction(models.Model):
     
     def __str__(self):
         return f"{self.get_interact_display()} on {self.date}"
+
+    class Meta:
+        ordering = ['-date']

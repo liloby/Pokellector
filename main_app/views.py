@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Pokemon
+from .forms import InteractionForm
 
 from django.http import HttpResponse
 # Create your views here.
@@ -14,20 +15,35 @@ def about(request):
 def pokemons_index(request):
     pokemons = Pokemon.objects.order_by('-level')
     latest_pokemon = Pokemon.objects.order_by('id').last
-    return render(request, 'pokemons/index.html', { 'pokemons': pokemons, 'latest_pokemon': latest_pokemon })
+    return render(request, 'pokemons/index.html', { 'pokemons': pokemons, 'latest_pokemon': latest_pokemon})
 
 def pokemons_detail(request, pokemon_id):
     pokemon = Pokemon.objects.get(id=pokemon_id)
-    return render(request, 'pokemons/detail.html', { 'pokemon': pokemon })
+    interaction_form = InteractionForm()
+    return render(request, 'pokemons/detail.html', {
+         'pokemon': pokemon, 'interaction_form': interaction_form 
+         })
+
+def add_interaction(request, pokemon_id):
+    form = InteractionForm(request.POST)
+    if form.is_valid():
+        new_interaction = form.save(commit=False)
+        new_interaction.pokemon_id = pokemon_id
+        pokemon = Pokemon.objects.get(id=pokemon_id)
+        pokemon.level += 1
+        pokemon.save()
+        new_interaction.save()
+    return redirect('detail', pokemon_id=pokemon_id)
 
 class PokemonCreate(CreateView):
+    pokemon = Pokemon.objects.all().count()
     model = Pokemon
     fields = '__all__'
     success_url = '/pokemons/'
 
 class PokemonUpdate(UpdateView):
     model = Pokemon
-    fields = ['description', 'type', 'level']
+    fields = ['name', 'description', 'type']
 
 class PokemonDelete(DeleteView):
     model = Pokemon

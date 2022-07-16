@@ -1,39 +1,88 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <h1 class="center">Pokemon Details</h1>
 
-<div class="row">
-  <div class="col s6">
-    <div class="card">
-      <div class="card-content">
-        <span class="card-title">{{ pokemon.name }}</span>
-        <p>Type: {{ pokemon.type }}</p>
-        <p>Level: {{ pokemon.level }}</p>
-        <p>Description: {{ pokemon.description }}</p>
+<div class="interact-box">
+  <div class="add-margin">
+    <div class="row">
+      <div class="col s6 margin-right">
+        <div class="card">
+          <div class="card-content center">
+            <span class="card-title">{{ pokemon.name }}</span>
+            <p>Level: <span class="level-color">{{ pokemon.level }}</span></p>
+            <p>Type: {{ pokemon.type }}</p>
+            <p>Description: {{ pokemon.description }}</p>
+          </div>
+          <div class="card-action flex-box">
+            <a href="{% url 'pokemons_delete' pokemon.id %}">Release</a>
+            <a class="blue-text" href="{% url 'pokemons_update' pokemon.id %}"
+              >Edit</a
+            >
+          </div>
+        </div>
       </div>
-      <div class="card-action">
-        <a href="{% url 'pokemons_update' pokemon.id %}">Edit</a>
-        <a href="{% url 'pokemons_delete' pokemon.id %}">Release</a>
+      <div class="attention-msg">
+      {% if pokemon.interact_for_today >= 3 %}
+      <div class="card-panel purple-text center-align transparent-box">
+        {{pokemon.name}} is very happy today!
+      </div>
+      {% elif pokemon.interact_for_today >= 2 %}
+      <div class="card-panel green-text center-align transparent-box">
+        {{pokemon.name}} is satisfied!
+      </div>
+      {% elif pokemon.interact_for_today >= 1 %}
+      <div class="card-panel yellow-text center-align transparent-box">
+        {{pokemon.name}} still needs attention!
+      </div>
+      {% else %}
+      <div class="card-panel red-text center-align transparent-box">
+        {{pokemon.name}} is very bored!
+      </div>
+      {% endif %}
+    </div>
+      <div class="col s6">
+        {% if pokemon.interact_for_today <= 2 %}
+        <form action="{% url 'add_interaction' pokemon.id %}" method="POST">
+          {% csrf_token %} {{ interaction_form.as_p }}
+          <div class="add-interact-btn">
+            <input type="submit" class="btn" value="Add Interaction" />
+          </div>
+        </form>
+        {% else %}
+        <div class="max-text">MAX INTERACTION REACHED, COME BACK TOMORROW!</div>
+        {% endif %}
+        <br />
+        <table class="striped">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Interaction</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for interaction in pokemon.interaction_set.all %}
+            <tr>
+              <td>{{interaction.date}}</td>
+              <td>{{interaction.get_interact_display}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
-  <div class="col s6">
-    <table class="striped">
-      <thead>
-        <tr><th>Date</th><th>Interaction</th></tr>
-      </thead>
-      <tbody>
-        {% for interaction in pokemon.interaction_set.all %}
-          <tr>
-            <td>{{interaction.date}}</td>
-            <td>{{interaction.get_interact_display}}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
 </div>
+<script>
+  const dateEl = document.getElementById("id_date");
+  M.Datepicker.init(dateEl, {
+    format: "yyyy-mm-dd",
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true,
+  });
 
+  const selectEl = document.getElementById("id_interact");
+  M.FormSelect.init(selectEl);
+</script>
 
 {% endblock %}
