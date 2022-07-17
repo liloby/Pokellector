@@ -39,7 +39,7 @@ def add_interaction(request, pokemon_id):
 class PokemonCreate(CreateView):
     pokemon = Pokemon.objects.all().count()
     model = Pokemon
-    fields = '__all__'
+    fields = ['name', 'type', 'level', 'description']
     success_url = '/pokemons/'
 
 class PokemonUpdate(UpdateView):

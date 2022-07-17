@@ -28,6 +28,8 @@ class Pokemon(models.Model):
     level = models.IntegerField()
     description = models.TextField(max_length=250)
 
+    moves = models.ManyToManyField(Move)
+
     def __str__(self):
         return self.name
 

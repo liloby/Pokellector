@@ -15,10 +15,12 @@
     <nav>
       <div class="nav-wrapper blue darken-3">
         <ul>
-          <li><a href="/" class="center brand-logo">Pokellector</a></li>
+          <li><a href="/" class="left brand-logo">Pokellector</a></li>
         </ul>
         <ul class="right">
           <li><a href="{% url 'index' %}">View All My Pokemons</a></li>
+          <li><a href="{% url 'moves_create' %}">Unlock New Moves</a></li>
+          <li><a href="{% url 'moves_index' %}">All Moves</a></li>
           <li><a href="{% url 'pokemons_create' %}">Catch a Pokemon</a></li>
           <li><a href="{% url 'about' %}">About</a></li>
         </ul>
