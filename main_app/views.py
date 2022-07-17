@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Pokemon
+from django.views.generic import ListView, DetailView
+from .models import Move, Pokemon
 from .forms import InteractionForm
 
 from django.http import HttpResponse
@@ -48,3 +49,21 @@ class PokemonUpdate(UpdateView):
 class PokemonDelete(DeleteView):
     model = Pokemon
     success_url = '/pokemons/'
+
+class MoveList(ListView):
+    model = Move
+
+class MoveDetail(DetailView):
+    model = Move
+
+class MoveCreate(CreateView):
+    model = Move
+    fields = '__all__'
+
+class MoveUpdate(UpdateView):
+    model = Move
+    fields = '__all__'
+
+class MoveDelete(DeleteView):
+    model = Move
+    success_url = '/moves/'

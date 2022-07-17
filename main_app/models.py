@@ -9,6 +9,18 @@ INTERACTS = (
 
 )
 
+class Move(models.Model):
+    name = models.CharField(max_length=50)
+    level_requirement = models.IntegerField()
+    type = models.CharField(max_length=20)
+    description = models.TextField(max_length=250)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('moves_detail', kwargs={'pk': self.id})
+
 # Create your models here.
 class Pokemon(models.Model):
     name = models.CharField(max_length=100)

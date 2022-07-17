@@ -164,6 +164,7 @@ tbody tr td {
     color: #b00000;
 }
 
+
 @keyframes move-ball {
     0% {
         transform: rotate(0deg);
