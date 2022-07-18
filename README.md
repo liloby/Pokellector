@@ -3,6 +3,8 @@
 
 ### App Interface:
 <img width="800" alt="image" src="https://user-images.githubusercontent.com/72634228/178934292-eedef4ac-a8f3-4dea-b815-97c46bc5b88d.png">
+
+#### Just like traditional Pokemon Games, Each Pokemon may only have 4 moves at a time
 <img width="800" alt="image" src="https://user-images.githubusercontent.com/72634228/179475432-f2ff1f29-f731-463c-b867-158891205858.png">
 
 
