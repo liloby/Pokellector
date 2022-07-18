@@ -1,14 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="center">All Moves</h1>
 
-{% for move in move_list %}
-<a href="{% url 'moves_detail' move.id %}">
-    <div class="card move-card">
-        <div class="card-content center">
-            <span class="card-title">{{ move.name }}</span>
-            {% if move.type == 'Normal' %}
+<h1 class="center">Move Details</h1>
+
+<div class="row center">
+    <div class="col s6 col-offset-3">
+      <div class="card">
+        <div class="card-content">
+          <span class="card-title">{{ move.name }}</span>
+          {% if move.type == 'Normal' %}
             <p>Type:<span class="white-text"> {{ move.type }}</span></p>
             {% elif move.type == 'Fire' %}
             <p>Type:<span class="red-text"> {{ move.type }}</span></p>
@@ -19,9 +20,15 @@
             {% elif move.type == 'Electric' %}
             <p>Type:<span class="yellow-text"> {{ move.type }}</span></p>
             {% endif%}
-            <p>Level Requirement: {{ move.level_requirement }}</p>
+          <p>Level Requirement: {{ move.level_requirement }}</p>
+          <p>Description: {{ move.description }}</p>
         </div>
+        <div class="card-action">
+          <a href="{% url 'moves_update' move.id %}">Edit</a>
+          <a href="{% url 'moves_delete' move.id %}">Delete</a>
+        </div>
+      </div>
     </div>
-  </a>
-{% endfor %}
+  </div>
 {% endblock %}
+

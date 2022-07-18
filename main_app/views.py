@@ -25,6 +25,10 @@ def pokemons_detail(request, pokemon_id):
          'pokemon': pokemon, 'interaction_form': interaction_form 
          })
 
+def assoc_move(request, pokemon_id, move_id):
+    Pokemon.Objects.get(id=pokemon_id).moves.add(move_id)
+    return redirect('detail', pokemon_id=pokemon_id)
+
 def add_interaction(request, pokemon_id):
     form = InteractionForm(request.POST)
     if form.is_valid():

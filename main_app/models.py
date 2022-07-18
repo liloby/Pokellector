@@ -21,6 +21,9 @@ class Move(models.Model):
     def get_absolute_url(self):
         return reverse('moves_detail', kwargs={'pk': self.id})
 
+    class Meta:
+        ordering = ['level_requirement']
+
 # Create your models here.
 class Pokemon(models.Model):
     name = models.CharField(max_length=100)

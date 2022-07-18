@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="center">Delete Move</h1>
+
+  <div class="row center">
+    <div class="col s6 col-offset-3">
+      <div class="card">
+        <div class="card-content">
+            <h4>Are you sure you want to delete <span class="teal-text">{{ object.name }}</span>?</h4>
+            <form action="" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Yes - Delete!" class="btn">
+                <a href="{% url 'moves_detail' object.id %}">Cancel</a>
+              </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
