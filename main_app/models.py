@@ -22,7 +22,7 @@ class Move(models.Model):
         return reverse('moves_detail', kwargs={'pk': self.id})
 
     class Meta:
-        ordering = ['level_requirement']
+        ordering = ['name']
 
 # Create your models here.
 class Pokemon(models.Model):

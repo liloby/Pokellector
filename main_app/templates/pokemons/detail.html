@@ -72,6 +72,68 @@
     </div>
   </div>
 </div>
+<hr>
+<div class="row">
+  <div class="col s6">
+    <h3 class="center white-text">{{ pokemon.name }}'s Moves</h3>
+    {% if pokemon.moves.count %}
+      {% for move in pokemon.moves.all %}
+        <div class="card">
+          <div class="card-content center">
+            <span class="card-title">
+              <h5>{{ move.name }}</h5>
+              <p class="{{move.type}}-color">{{ move.type }}</p>
+              <p class="des-height">{{move.description}}</p>
+            </span>
+          </div>
+          <div class="card-action">
+            <form action="{% url 'unassoc_move' pokemon.id move.id %}" method="POST">
+              {% csrf_token %}
+              <div class="center">
+              <button type="submit" class="btn">Forget</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <h5 class="center">No Moves</h5>
+    {% endif %}
+  </div>
+  <!-- Available toys will come after this line -->
+<div class="row">
+<div class="col s6">
+  <h3 class="center white-text">Available Moves</h3>
+  {% if moves.count %}
+    {% for move in moves.all %}
+    {% if move.type in pokemon.type and pokemon.level >= move.level_requirement or move.type == "Normal" and pokemon.level >= move.level_requirement  %}
+      <div class="card">
+        <div class="card-content center">
+          <span class="card-title">
+            <h5>{{move.name}}</h5>
+            <p class="{{move.type}}-color">{{move.type}}</p>
+            <p class="des-height">{{move.description}}</p>
+        </div>
+        <div class="card-action">
+          <form action="{% url 'assoc_move' pokemon.id move.id %}" method="POST">
+            {% csrf_token %}
+            <div class="center">
+              {% if pokemon.moves.count < 4 %}
+            <button type="submit" class="btn">Add</button>
+            {% else %}
+            <p>Forget Move to Add</p>
+            {% endif %}
+          </div>
+          </form>
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <h5>{{cat.name}} Already Has All Moves Available</h5>
+  {% endif %}
+</div>
+</div>
 <script>
   const dateEl = document.getElementById("id_date");
   M.Datepicker.init(dateEl, {

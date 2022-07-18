@@ -9,17 +9,7 @@
       <div class="card">
         <div class="card-content">
           <span class="card-title">{{ move.name }}</span>
-          {% if move.type == 'Normal' %}
-            <p>Type:<span class="white-text"> {{ move.type }}</span></p>
-            {% elif move.type == 'Fire' %}
-            <p>Type:<span class="red-text"> {{ move.type }}</span></p>
-            {% elif move.type == 'Water' %}
-            <p>Type:<span class="blue-text"> {{ move.type }}</span></p>
-            {% elif move.type == 'Grass' %}
-            <p>Type:<span class="green-text"> {{ move.type }}</span></p>
-            {% elif move.type == 'Electric' %}
-            <p>Type:<span class="yellow-text"> {{ move.type }}</span></p>
-            {% endif%}
+            <p>Type:<span class="{{move.type}}-color"> {{ move.type }}</span></p>
           <p>Level Requirement: {{ move.level_requirement }}</p>
           <p>Description: {{ move.description }}</p>
         </div>

@@ -20,13 +20,21 @@ def pokemons_index(request):
 
 def pokemons_detail(request, pokemon_id):
     pokemon = Pokemon.objects.get(id=pokemon_id)
+    id_list = pokemon.moves.all().values_list('id')
+    moves_pokemon_doesnt_have = Move.objects.exclude(id__in=id_list)
     interaction_form = InteractionForm()
     return render(request, 'pokemons/detail.html', {
-         'pokemon': pokemon, 'interaction_form': interaction_form 
+         'pokemon': pokemon, 'interaction_form': interaction_form,
+         'moves': moves_pokemon_doesnt_have 
          })
 
 def assoc_move(request, pokemon_id, move_id):
-    Pokemon.Objects.get(id=pokemon_id).moves.add(move_id)
+    Pokemon.objects.get(id=pokemon_id).moves.add(move_id)
+    return redirect('detail', pokemon_id=pokemon_id)
+
+def unassoc_move(request, pokemon_id, move_id):
+    pokemon = Pokemon.objects.get(id=pokemon_id)
+    pokemon.moves.remove(move_id)
     return redirect('detail', pokemon_id=pokemon_id)
 
 def add_interaction(request, pokemon_id):

@@ -58,7 +58,7 @@ h1 {
 }
 
 .des-height {
-    min-height: 3.5rem;
+    min-height: 3rem;
 }
 
 .card {
@@ -176,6 +176,25 @@ tbody tr td {
     color: #b00000;
 }
 
+.Electric-color {
+    color: yellow;
+}
+
+.Fire-color {
+    color: red;
+}
+
+.Water-color {
+    color: blue;
+}
+
+.Normal-color {
+    color: rgb(224, 224, 224);
+}
+
+.Grass-color {
+    color: green;
+}
 
 @keyframes move-ball {
     0% {
