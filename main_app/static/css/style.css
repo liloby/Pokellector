@@ -196,6 +196,10 @@ tbody tr td {
     color: green;
 }
 
+.Flying-color {
+    color: rgb(214, 25, 214)
+}
+
 @keyframes move-ball {
     0% {
         transform: rotate(0deg);
