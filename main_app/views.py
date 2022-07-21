@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from .models import Move, Pokemon
+from .models import Move, Pokemon, Interaction
 from .forms import InteractionForm
 
 from django.http import HttpResponse
@@ -23,6 +23,8 @@ def pokemons_detail(request, pokemon_id):
     id_list = pokemon.moves.all().values_list('id')
     moves_pokemon_doesnt_have = Move.objects.exclude(id__in=id_list)
     interaction_form = InteractionForm()
+    interactions = Interaction.objects.all().order_by('-date')
+    print(interactions)
     return render(request, 'pokemons/detail.html', {
          'pokemon': pokemon, 'interaction_form': interaction_form,
          'moves': moves_pokemon_doesnt_have 
