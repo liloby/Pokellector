@@ -60,7 +60,7 @@
             </tr>
           </thead>
           <tbody>
-            {% for interaction in pokemon.interaction_set.all %}
+            {% for interaction in interactions %}
             <tr>
               <td>{{interaction.date}}</td>
               <td>{{interaction.get_interact_display}}</td>
